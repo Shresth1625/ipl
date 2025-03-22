@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL Betting Simulator | FLMC Consultancy</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: linear-gradient(to right, #007bff, #0056b3);
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        header img {
+            height: 50px;
+            margin-right: 15px;
+        }
+        main {
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+        }
+        button {
+            background: linear-gradient(to right, #0056b3, #003d80);
+            border: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.3s ease-in-out;
+        }
+        button:hover {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            transform: scale(1.2);
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 26px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 1s ease-in, transform 0.5s;
+        }
+        #result.show {
+            opacity: 1;
+            transform: translateY(10px);
+        }
+        .win {
+            color: #28a745;
+            animation: winAnimation 1.5s infinite alternate;
+        }
+        .lose {
+            color: #dc3545;
+            animation: loseAnimation 1s infinite alternate;
+        }
+        @keyframes winAnimation {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+        @keyframes loseAnimation {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(10deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="image.png" alt="FLMC Consultancy Logo">
+        <h1>🏏 IPL Betting Simulator 2.0 | FLMC Consultancy 🚀</h1>
+    </header>
+    <main>
+        <section id="match">
+            <h2>🔥 Upcoming Match 🔥</h2>
+            <label for="team1">Select Team 1:</label>
+            <select id="team1"></select>
+            🆚
+            <label for="team2">Select Team 2:</label>
+            <select id="team2"></select>
+            <br><br>
+            <input type="number" id="betAmount" placeholder="Enter Bet Amount 💰">
+            <label for="betTeam">Bet On:</label>
+            <select id="betTeam"></select>
+            <br><br>
+            <button onclick="placeBet()">Place Bet 🚀</button>
+        </section>
+        <section id="result">
+            <h2>🏆 Match Result 🏆</h2>
+            <p id="winner"></p>
+        </section>
+    </main>
+    <script>
+        const teams = ["Mumbai Indians", "Chennai Super Kings", "Royal Challengers Bangalore", "Kolkata Knight Riders", "Delhi Capitals", "Sunrisers Hyderabad", "Punjab Kings", "Rajasthan Royals", "Gujarat Titans", "Lucknow Super Giants"];
+        
+        function populateDropdowns() {
+            let team1Dropdown = document.getElementById("team1");
+            let team2Dropdown = document.getElementById("team2");
+            let betDropdown = document.getElementById("betTeam");
+            teams.forEach(team => {
+                let option1 = new Option(team, team);
+                let option2 = new Option(team, team);
+                let option3 = new Option(team, team);
+                team1Dropdown.add(option1);
+                team2Dropdown.add(option2);
+                betDropdown.add(option3);
+            });
+        }
+
+        function placeBet() {
+            let team1 = document.getElementById("team1").value;
+            let team2 = document.getElementById("team2").value;
+            let betTeam = document.getElementById("betTeam").value;
+            let betAmount = document.getElementById("betAmount").value;
+            if (team1 === team2) {
+                alert("Both teams cannot be the same! Choose different teams.");
+                return;
+            }
+            
+            let winner = Math.random() < 0.5 ? team1 : team2;
+            document.getElementById("winner").innerText = `Winner: ${winner} 🏆`;
+            document.getElementById("result").classList.add("show");
+            if (betTeam === winner) {
+                document.getElementById("winner").className = "win";
+            } else {
+                document.getElementById("winner").className = "lose";
+            }
+        }
+        
+        document.addEventListener("DOMContentLoaded", populateDropdowns);
+    </script>
+</body>
+</html>

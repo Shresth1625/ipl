@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPL Betting Simulator 3.0</title>
+    <title>IPL Betting Simulator | FLMC Consultancy</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
         body {
             font-family: 'Poppins', sans-serif;
             text-align: center;
@@ -65,12 +66,20 @@
             color: #dc3545;
             animation: loseAnimation 1s infinite alternate;
         }
+        @keyframes winAnimation {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+        @keyframes loseAnimation {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(10deg); }
+        }
     </style>
 </head>
 <body>
     <header>
-        <img src="image.png" alt="IPL Betting Logo">
-        <h1>🏏 IPL Betting Simulator 3.0 🚀</h1>
+        <img src="image.png" alt="FLMC Consultancy Logo">
+        <h1>🏏 IPL Betting Simulator 2.0 | FLMC Consultancy 🚀</h1>
     </header>
     <main>
         <h2>🔥 Upcoming Match 🔥</h2>
@@ -131,6 +140,7 @@
             let winChance = teams[team1] / totalProbability;
             let winner = Math.random() < winChance ? team1 : team2;
             document.getElementById("winner").innerText = `Winner: ${winner} 🏆`;
+            document.getElementById("result").classList.add("show");
             if (betTeam === winner) {
                 document.getElementById("winner").className = "win";
             } else {
